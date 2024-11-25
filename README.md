@@ -4,11 +4,13 @@ An state-of-the-art virtual try-on solution that combines the power of [CATVTON]
 Also inspired by [In-Context LoRA](https://arxiv.org/abs/2410.23775) for prompt engineering.
 
 ## Update
-[![SOTA](https://img.shields.io/badge/SOTA-FID%205.59-brightgreen)](https://drive.google.com/file/d/1T2W5R1xH_uszGVD8p6UUAtWyx43rxGmI/view?usp=sharing)
-[![Dataset](https://img.shields.io/badge/Dataset-VITON--HD-blue)](https://github.com/shadow2496/VITON-HD)
 
 ---
-**Latest Achievement** (2024/11/24):
+**Latest Achievement** 
+(2024/11/25):
+- Released lora weights. 
+
+(2024/11/24):
 - Released FID score and gradio demo
 - CatVton-Flux-Alpha achieved **SOTA** performance with FID: `5.593255043029785` on VITON-HD dataset. Test configuration: scale 30, step 30. My VITON-HD test inferencing results available [here](https://drive.google.com/file/d/1T2W5R1xH_uszGVD8p6UUAtWyx43rxGmI/view?usp=sharing)
 
@@ -22,8 +24,8 @@ Also inspired by [In-Context LoRA](https://arxiv.org/abs/2410.23775) for prompt 
 | ![Original](example/person/00008_00.jpg) | ![Garment](example/garment/00034_00.jpg) | ![Result](example/result/3.png) |
 
 ## Model Weights
-Hugging Face: 🤗 [catvton-flux-alpha](https://huggingface.co/xiaozaa/catvton-flux-alpha)
-
+LORA weights in Hugging Face: 🤗 [catvton-flux-alpha](https://huggingface.co/xiaozaa/catvton-flux-alpha)
+Fine-tuning weights in Hugging Face: 🤗 [catvton-flux-lora-alpha](https://huggingface.co/xiaozaa/catvton-flux-lora-alpha)
 The model weights are trained on the [VITON-HD](https://github.com/shadow2496/VITON-HD) dataset.
 
 ## Prerequisites
@@ -40,6 +42,19 @@ huggingface-cli login
 ## Usage
 
 Run the following command to try on an image:
+
+LORA version:
+```bash
+python tryon_inference_lora.py \
+--image ./example/person/00008_00.jpg \
+--mask ./example/person/00008_00_mask.png \
+--garment ./example/garment/00034_00.jpg \
+--seed 4096 \
+--output_tryon test_lora.png \
+--steps 30
+```
+
+Fine-tuning version:
 ```bash
 python tryon_inference.py \
 --image ./example/person/00008_00.jpg \
@@ -64,7 +79,8 @@ Gradio demo:
 - [x] Release the FID score
 - [x] Add gradio demo
 - [ ] Release updated weights with better performance
-- [ ] Train a smaller model
+- [x] Train a smaller model
+- [ ] Support comfyui
 
 ## Citation
 
